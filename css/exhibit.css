@@ -1,0 +1,11 @@
+.interpretations_imgs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.interpretations_img {
+    width: 163px;
+    padding: 60px;
+}

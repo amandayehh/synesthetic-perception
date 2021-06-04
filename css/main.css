@@ -15,11 +15,12 @@ h1 {
     font-style: normal;
     font-weight: normal;
     font-size: 0.7em;
+    line-height: 120%;
 }
+
 
 @media screen and (min-width: 525px) {
     .container {
         padding: 24px;
     }
-
 }

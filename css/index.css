@@ -1,7 +1,27 @@
 .play_button {
-    position: absolute;
-    bottom: 14px;
+    margin-top: calc(100vh - 120px);
 }
+
+.exhibit {
+    bottom: 0px;
+    width: 100%;
+
+    /* padding: 14px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+    margin: 16px 0;
+}
+
+
+
 
 @media screen and (min-width: 525px) {
     .play_button {
