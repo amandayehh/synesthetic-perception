@@ -1,0 +1,25 @@
+* {
+    color: white;
+}
+
+body {
+    background-color: black;
+}
+
+.container {
+    padding: 10px;
+}
+
+h1 {
+    font-family: Monument Extended;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.8em;
+}
+
+@media screen and (min-width: 525px) {
+    .container {
+        padding: 20px;
+    }
+
+}

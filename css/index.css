@@ -1,0 +1,10 @@
+.play_button {
+    position: absolute;
+    bottom: 10px;
+}
+
+@media screen and (min-width: 525px) {
+    .play_button {
+        bottom: 20px;
+    }
+}
