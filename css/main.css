@@ -4,6 +4,7 @@
 
 body {
     background-color: black;
+    overflow-x: hidden;
 }
 
 .container {
@@ -18,9 +19,69 @@ h1 {
     line-height: 120%;
 }
 
+h2 {
+    font-family: "Test Founders Grotesk";
+    font-size: 1.8em;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 115%;
+}
+
+p {
+    font-family: "Test Founders Grotesk Text";
+
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 130%;
+    margin-bottom: 1em;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    transition: 0.1s;
+    justify-content: space-between;
+}
+
+.header_title {
+    margin-bottom: 0.5em;
+}
+
+.header_about:hover {
+    padding-top: 0.5em;
+}
+
+.bottom_nav {
+    bottom: 0px;
+    /* width: 100%; */
+
+    /* padding: 14px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: white;
+    margin: 16px 0;
+}
+
 
 @media screen and (min-width: 525px) {
     .container {
         padding: 24px;
     }
+
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .header_title {
+        margin-bottom: 0;
+    }
+
 }

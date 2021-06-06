@@ -1,0 +1,48 @@
+.video {
+    width: 100%;
+    margin-bottom: 3em;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3em;
+}
+
+.heading_label {
+    margin-bottom: 1em;
+}
+
+.heading_title {
+    margin-bottom: 1em;
+}
+
+
+@media screen and (min-width: 525px) {
+    .inner_pages {
+        width: 80vw;
+        max-width: 850px;
+        margin: auto;
+    }
+
+    .content {
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10em;
+
+    }
+
+    .video {
+        width: 100%;
+        margin-bottom: 10em;
+    }
+
+    .heading {
+        width: 26em;
+    }
+
+    .text {
+        width: 23em;
+    }
+
+}
