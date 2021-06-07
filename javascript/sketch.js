@@ -1,10 +1,18 @@
-var vw, wh, song, loaded, fft, amplitude, peakDetect, spectrum, level, pTreble, treble, highmid, pMid, mid, lowmid, bass, centroid;
-let playButton;
+var vw, wh, song, songs, newSong, loaded, nextButtonPressed, fft, amplitude, peakDetect, spectrum, level, pTreble, treble, highmid, pMid, mid, lowmid, bass, centroid;
+let playButton, nextButton;
 var highX, highY, midX, midY, midW;
 let blob;
+let currentN, nextN, pauseSVG, playSVG;
 
 function preload() {
     blob = loadImage('images/blob1.png');
+  
+    song1 = loadSound('music/Interpretation 1.mp3');
+    song2 = loadSound('music/Interpretation 2.mp3');
+    song3 = loadSound('music/Interpretation 3.mp3');
+    songs = [song1,song2,song3];
+    currentN = 0;
+    song = songs[currentN]
 }
 
 function setup() {
@@ -15,8 +23,6 @@ function setup() {
     var y = (windowHeight - height) / 2;
     cnv.position(x, y);
     
-    song = loadSound('music/Experimental Project 1.mp3', loaded);
-
     song.setVolume(0.5);
     loaded = false;
 
@@ -25,6 +31,9 @@ function setup() {
     fft = new p5.FFT();
     amplitude = new p5.Amplitude();
     peakDetect = new p5.PeakDetect();
+
+    nextButton = select('.next_button')
+    previousButton = select('.previous_button')
 
     pTreble = 0;
     pMid = 0;
@@ -35,23 +44,29 @@ function setup() {
     midW = [];
 
     imageMode(CORNER);
+    buttonPress();
+
+    pauseSVG = select('.pause')
+    playSVG = select('.play')
+
+    pauseSVG.hide();
 
 
 }
 
-function loaded() {
-    console.log("loaded");
-    loaded = true;
-}
 
 function togglePlaying() {
-    if (loaded == true) {
         if (!song.isPlaying()) {
             song.play();
+            playSVG.hide();
+            pauseSVG.show();
+
         } else {
             song.pause();
+            pauseSVG.hide();
+            playSVG.show();
+
         }
-    }
 }
 
 function windowResized() {
@@ -61,6 +76,7 @@ function windowResized() {
 
 
 function draw() {
+
     if (song.isPlaying()) {
         // background(100)
         // if(bass>100){
@@ -101,10 +117,7 @@ function draw() {
             //ellipse(midX[i], midY[i], midW[i],midW[i]);
 
             image(blob, midX[i], midY[i], midW[i], midW[i]);
-
         }
-
-
 
         // bass
         //    console.log(bass);
@@ -114,7 +127,6 @@ function draw() {
             fill(0, 0, 0, 0)
         }
         rect(0, 0, width, height)
-
 
 
         //highs
@@ -132,10 +144,48 @@ function draw() {
             rect(0, highY[i], width, 20);
 
         }
-
-
-
     }
 
+}
 
+function buttonPress(){
+    
+    nextButton.mousePressed(nextSong);
+    previousButton.mousePressed(previousSong)
+}
+
+function nextSong(){   
+    clear();
+    if(song.isPlaying()){
+        song.pause();
+    }
+    if(currentN+1>=3){
+        currentN = 0;
+    }else{
+        currentN ++;
+    }
+    song = songs[currentN];
+
+    song.play(); 
+    playSVG.hide();
+    pauseSVG.show();
+}
+
+function previousSong(){   
+    clear();
+    if(song.isPlaying()){
+        song.pause();
+    }
+    if(currentN-1<0){
+        currentN = 2;
+    }else{
+        currentN --;
+    }
+    song = songs[currentN];
+
+    console.log(song)
+
+    song.play(); 
+    playSVG.hide();
+    pauseSVG.show();
 }
