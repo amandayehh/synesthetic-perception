@@ -54,6 +54,18 @@ p {
     margin-bottom: 0.5em;
 }
 
+a>* {
+    transition-duration: 0.1s;
+}
+
+a>p {
+    /* border-bottom: 2px dotted white; */
+    text-decoration: underline;
+    display: inline;
+}
+
+
+
 
 /* .header_about:hover {
     padding-top: 0.5em;
