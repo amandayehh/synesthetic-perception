@@ -15,7 +15,7 @@ function setup() {
     var y = (windowHeight - height) / 2;
     cnv.position(x, y);
     
-    song = loadSound('../music/Experimental Project 1.mp3', loaded);
+    song = loadSound('music/Experimental Project 1.mp3', loaded);
 
     song.setVolume(0.5);
     loaded = false;
