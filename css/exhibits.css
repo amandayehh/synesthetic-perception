@@ -1,0 +1,34 @@
+.interpretations_imgs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.interpretations_img {
+    width: 163px;
+    padding: 60px;
+}
+
+@media screen and (min-width: 525px) {
+    .interpretations_imgs {
+        flex-direction: row;
+        padding: none;
+        justify-content: space-between;
+        width: 80vw;
+        margin: auto;
+    }
+
+    .interpretations_img {
+        width: 10vw;
+        padding: 0;
+    }
+
+
+    .exhbit {
+        display: flex;
+        height: calc(100vh - var(--large-container) * 2);
+        justify-content: space-between;
+        flex-direction: column;
+    }
+}

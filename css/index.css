@@ -1,5 +1,8 @@
-.play_button {
-    margin-top: calc(100vh - 120px);
+.index {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: calc(100vh - var(--small-container) * 2);
 }
 
 .exhibit {
@@ -10,7 +13,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 .divider {
@@ -21,10 +23,17 @@
 }
 
 
-
-
 @media screen and (min-width: 525px) {
+    .index {
+        height: calc(100vh - var(--large-container) * 2);
+    }
+
     .play_button {
         bottom: 24px;
+    }
+
+    .bottom {
+        display: flex;
+        justify-content: space-between;
     }
 }
