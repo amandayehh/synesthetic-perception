@@ -21,6 +21,11 @@
     margin-bottom: 3em;
 }
 
+.credits {
+    margin-bottom: 8px;
+    opacity: 60%;
+}
+
 @media screen and (min-width: 525px) {
     .container {
         height: calc(100vh - var(--large-container) * 2);
@@ -39,5 +44,11 @@
 
     .text {
         width: 20em;
+    }
+
+    .bottom_content {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
     }
 }

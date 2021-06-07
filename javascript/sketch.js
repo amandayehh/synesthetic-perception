@@ -6,11 +6,11 @@ let currentN, nextN, pauseSVG, playSVG;
 
 function preload() {
     blob = loadImage('images/blob1.png');
-  
+
     song1 = loadSound('music/Interpretation 1.mp3');
     song2 = loadSound('music/Interpretation 2.mp3');
     song3 = loadSound('music/Interpretation 3.mp3');
-    songs = [song1,song2,song3];
+    songs = [song1, song2, song3];
     currentN = 0;
     song = songs[currentN]
 }
@@ -23,9 +23,9 @@ function setup() {
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
     cnv.position(x, y);
-    
+
     song.setVolume(0.5);
-    loaded = false;
+    // loaded = false;
 
     playButton = select('.play_button')
     playButton.mousePressed(togglePlaying)
@@ -38,8 +38,8 @@ function setup() {
 
     setSongName()
 
-    
-    
+
+
 
     pTreble = 0;
     pMid = 0;
@@ -62,17 +62,17 @@ function setup() {
 
 
 function togglePlaying() {
-        if (!song.isPlaying()) {
-            song.play();
-            playSVG.hide();
-            pauseSVG.show();
+    if (!song.isPlaying()) {
+        song.play();
+        playSVG.hide();
+        pauseSVG.show();
 
-        } else {
-            song.pause();
-            pauseSVG.hide();
-            playSVG.show();
+    } else {
+        song.pause();
+        pauseSVG.hide();
+        playSVG.show();
 
-        }
+    }
 }
 
 function windowResized() {
@@ -154,40 +154,40 @@ function draw() {
 
 }
 
-function buttonPress(){
-    
+function buttonPress() {
+
     nextButton.mousePressed(nextSong);
     previousButton.mousePressed(previousSong)
 }
 
-function nextSong(){   
+function nextSong() {
     clear();
-    if(song.isPlaying()){
+    if (song.isPlaying()) {
         song.pause();
     }
-    if(currentN+1>=songs.length){
+    if (currentN + 1 >= songs.length) {
         currentN = 0;
-    }else{
-        currentN ++;
+    } else {
+        currentN++;
     }
     song = songs[currentN];
     setSongName();
 
 
-    song.play(); 
+    song.play();
     playSVG.hide();
     pauseSVG.show();
 }
 
-function previousSong(){   
+function previousSong() {
     clear();
-    if(song.isPlaying()){
+    if (song.isPlaying()) {
         song.pause();
     }
-    if(currentN-1<0){
-        currentN = songs.length-1;
-    }else{
-        currentN --;
+    if (currentN - 1 < 0) {
+        currentN = songs.length - 1;
+    } else {
+        currentN--;
     }
     song = songs[currentN];
     setSongName();
@@ -195,13 +195,13 @@ function previousSong(){
 
     console.log(song)
 
-    song.play(); 
+    song.play();
     playSVG.hide();
     pauseSVG.show();
 }
 
-function setSongName(){
+function setSongName() {
     songName = select('.song')
-    displayN = currentN+1;
+    displayN = currentN + 1;
     songName.elt.innerText = "Interpretation " + displayN;
 }
