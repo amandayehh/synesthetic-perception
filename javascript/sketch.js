@@ -1,4 +1,4 @@
-var vw, wh, song, songs, newSong, loaded, nextButtonPressed, fft, amplitude, peakDetect, spectrum, level, pTreble, treble, highmid, pMid, mid, lowmid, bass, centroid;
+var vw, wh, song, songs, newSong, loaded, nextButtonPressed, songName, songNames, displayN, fft, amplitude, peakDetect, spectrum, level, pTreble, treble, highmid, pMid, mid, lowmid, bass, centroid;
 let playButton, nextButton;
 var highX, highY, midX, midY, midW;
 let blob;
@@ -16,6 +16,7 @@ function preload() {
 }
 
 function setup() {
+
     wv = windowWidth;
     vh = windowHeight;
     let cnv = createCanvas(windowWidth, windowHeight);
@@ -34,6 +35,11 @@ function setup() {
 
     nextButton = select('.next_button')
     previousButton = select('.previous_button')
+
+    setSongName()
+
+    
+    
 
     pTreble = 0;
     pMid = 0;
@@ -159,12 +165,14 @@ function nextSong(){
     if(song.isPlaying()){
         song.pause();
     }
-    if(currentN+1>=3){
+    if(currentN+1>=songs.length){
         currentN = 0;
     }else{
         currentN ++;
     }
     song = songs[currentN];
+    setSongName();
+
 
     song.play(); 
     playSVG.hide();
@@ -177,15 +185,23 @@ function previousSong(){
         song.pause();
     }
     if(currentN-1<0){
-        currentN = 2;
+        currentN = songs.length-1;
     }else{
         currentN --;
     }
     song = songs[currentN];
+    setSongName();
+
 
     console.log(song)
 
     song.play(); 
     playSVG.hide();
     pauseSVG.show();
+}
+
+function setSongName(){
+    songName = select('.song')
+    displayN = currentN+1;
+    songName.elt.innerText = "Interpretation " + displayN;
 }
