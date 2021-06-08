@@ -21,6 +21,7 @@
 
 .controls>svg {
     margin-right: 8px;
+    cursor: pointer;
 }
 
 .song {
@@ -157,7 +158,7 @@
     .welcome_button {
         width: auto;
         margin-top: calc((100vh - 9em) / 2);
-        left: calc((100vw - var(--large-container))/ 2 - 13em);
+        left: calc((100vw - var(--large-container))/ 2 - 11em);
     }
 
     .welcome_click {

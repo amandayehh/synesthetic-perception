@@ -1,17 +1,42 @@
-var vw, wh, song, songs, newSong, loaded, nextButtonPressed, songName, songNames, displayN, fft, amplitude, peakDetect, spectrum, level, pTreble, treble, highmid, pMid, mid, lowmid, bass, centroid;
+var vw, wh, song, songs, blobs, newSong, loaded, nextButtonPressed, songName, songNames, displayN, fft, amplitude, peakDetect, spectrum, level, treble, highMid, mid, lowMid, bass, centroid;
 let playButton, nextButton, welcome, loading, welcomeButton, welcomeClick;
-var highX, highY, midX, midY, midW;
-let blob;
+var pBass, pLowMid, pMid, pHighMid, pTreble;
+var bassX, bassY, bassW, midX, lowMidX, lowMidY,lowMidW, midY, midW, highMidX, highMidY, highMidW, trebleX, trebleY, trebleW, highBarX, highBarY, highBarH,highBarW, highBarGlitch;
+let blob, red, orange, yellow,lightGreen, green, lightBlue, blue, purple, pink, white;
 let currentN, nextN, pauseSVG, playSVG;
+let glitches, glitch1,glitch2,glitch3,glitch4,glitch5,glitch6,glitch7,glitch8;
+let cnv;
 
 function preload() {
     welcomeButton = select('.welcome_button')
 
-    blob = loadImage('images/blob1.png');
+    // blob = loadImage('images/ƒ.png');
+    red = loadImage('images/blobs/red.png');
+    orange = loadImage('images/blobs/orange.png');
+    yellow = loadImage('images/blobs/yellow.png');
+    lightGreen = loadImage('images/blobs/light green.png');
+    green = loadImage('images/blobs/green.png');
+    lightBlue = loadImage('images/blobs/light blue.png');
+    blue = loadImage('images/blobs/blue.png');
+    purple = loadImage('images/blobs/purple.png');
+    pink = loadImage('images/blobs/pink.png');
+    white = loadImage('images/blobs/white.png');
 
-    song1 = loadSound('music/Interpretation 1.mp3');
-    song2 = loadSound('music/Interpretation 2.mp3');
-    song3 = loadSound('music/Interpretation 3.mp3');
+    glitch1 = loadImage('images/glitches/glitch01.png');
+    glitch2 = loadImage('images/glitches/glitch02.png');
+    glitch3 = loadImage('images/glitches/glitch03.png');
+    glitch4 = loadImage('images/glitches/glitch04.png');
+    glitch5 = loadImage('images/glitches/glitch05.png');
+    glitch6 = loadImage('images/glitches/glitch06.png');
+    glitch7 = loadImage('images/glitches/glitch07.png');
+    glitch8 = loadImage('images/glitches/glitch08.png');
+
+
+    glitches= [glitch1,glitch2,glitch3,glitch4,glitch5,glitch6];
+
+    song1 = loadSound('music/Interpretation 1.wav');
+    song2 = loadSound('music/Interpretation 2.wav');
+    song3 = loadSound('music/Interpretation 3.wav');
     songs = [song1, song2, song3];
     currentN = 0;
     song = songs[currentN]
@@ -26,7 +51,7 @@ function setup() {
 
     wv = windowWidth;
     vh = windowHeight;
-    let cnv = createCanvas(windowWidth, windowHeight);
+    cnv = createCanvas(windowWidth, windowHeight);
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
     cnv.position(x, y);
@@ -56,13 +81,41 @@ function setup() {
 
     setSongName();
 
-    pTreble = 0;
+    pBass = 0;
+    pLowMid = 0;
     pMid = 0;
-    highX = [];
-    highY = [];
+    pHighMid = 0;
+    pTreble = 0;
+ 
+
+    bassX=[];
+    bassY = [];
+    bassW=[];
+
+    
+    lowMidX = [];
+    lowMidY = [];
+    lowMidW = [];
+
+
     midX = [];
     midY = [];
     midW = [];
+
+    trebleX = [];
+    trebleY = [];
+    trebleW = [];
+
+
+    highMidX = [];
+    highMidY = [];
+    highMidW = [];
+
+    highBarX = [];
+    highBarY = [];
+    highBarH = [];
+    highBarW=[];
+    highBarGlitch = [];
 
     imageMode(CORNER);
     buttonPress();
@@ -104,47 +157,45 @@ function draw() {
         // }
         smooth();
 
-        background(0);
+       // background(0);
         spectrum = fft.analyze();
         level = amplitude.getLevel();
+
         pTreble = treble;
         treble = fft.getEnergy('treble');
+        pHighMid = highMid;
         highMid = fft.getEnergy('highMid');
         pMid = mid;
         mid = fft.getEnergy('mid');
+        pLowMid=lowMid
         lowMid = fft.getEnergy('lowMid');
-        peakDetect.update(fft);
+        pBass = bass;
         bass = fft.getEnergy(16);
+
+        peakDetect.update(fft);
         centroid = fft.getCentroid();
-        // console.log(centroid);
+        colorMode(HSB, 360);
+        background(map(centroid, 900,10000,0,360),65,20);
+
 
         //mids
+        generateBlobs(bass, pBass, 20, 4, bassX,bassY,bassW, red);
+        generateBlobs(lowMid, pLowMid, 16, 4, lowMidX,lowMidY,lowMidW, orange);
 
-        if (mid > pMid + 30) {
-            midX.push(random(width) - width / 2);
-            midY.push(random(height) - height / 2);
-            midW.push(random(height, width));
-        } else if (mid < pMid - 6) {
-            midX.pop();
-            midY.pop();
-            midW.pop();
-        }
-        for (let i = 0; i < midX.length; i++) {
-            //fill(50)
-            // if(bass > 100){
-            //     fill(50,50,50, map(bass,100,200,255,0));
-            // }
-            //ellipse(midX[i], midY[i], midW[i],midW[i]);
+        generateBlobs(mid, pMid, 20, 4, midX,midY,midW, green);
 
-            image(blob, midX[i], midY[i], midW[i], midW[i]);
-        }
+        generateBlobs(highMid, pHighMid, 25, 4, highMidX,highMidY,highMidW, blue);
+
+        generateBlobs(treble, pTreble, 20, 4, trebleX,trebleY,trebleW, purple);
+
+
 
         // bass
-        //    console.log(bass);
-        if (bass > 160) {
-            fill(0, 0, 0, map(bass, 180, 255, 255, 0))
+        if (bass > 180) {
+           
+            fill(map(centroid, 900,10000,0,360),65,20, map(bass, 180, 255, 255, 50))
         } else {
-            fill(0, 0, 0, 0)
+            fill(map(centroid, 900,10000,0,360),65,20,0)
         }
         rect(0, 0, width, height)
 
@@ -152,24 +203,58 @@ function draw() {
         //highs
         //random X
         if (treble > pTreble + 8 && treble > 90) {
-            highX.push(random(0, width));
-            highY.push(random(0, height));
-        } else if (treble < pTreble - 5) {
-            highX.pop();
-            highY.pop();
+            highBarX.push(random(0, width-width/3));
+            highBarY.push(random(0, height));
+            highBarH.push(random(5,60));
+            highBarW.push(random(width/3, width));
+            highBarGlitch.push(glitches[Math.floor(Math.random() * glitches.length)]);
+        } else if (treble < pTreble - 2) {
+            highBarX.pop();
+            highBarY.pop();
+            highBarH.pop();
+            highBarW.pop();
+            highBarGlitch.pop();
         }
 
-        for (let i = 0; i < highX.length; i++) {
+        for (let i = 0; i < highBarX.length; i++) {
             fill(map(treble, 90, 170, 0, 255));
-            rect(0, highY[i], width, 20);
+
+            push();
+            blendMode(SCREEN);
+            image(highBarGlitch[i], highBarX[i], highBarY[i], highBarW, highBarH[i]);
+            pop();
 
         }
     }
 
 }
 
+function generateBlobs(f, pf, addDiff, decreaseDiff, xs,ys,ws, color){
+    if (f > pf + addDiff) {
+        if(height < width){
+            xs.push(random((height*-1),width));
+            ys.push(random((height*-1),height));
+            ws.push(random(height, width*2));
+        }else{
+            xs.push(random((width*-1),width));
+            ys.push(random((width*-1),height));
+            ws.push(random(height, width*2));
+        }
+       
+    } else if (f < pf - decreaseDiff) {
+        xs.pop();
+        ys.pop();
+        ws.pop();
+    }
+
+    for (let i = 0; i < xs.length; i++) {
+
+        image(color, xs[i], ys[i], ws[i], ws[i]);
+
+    }
+}
+
 function startSong(){
-    console.log("welcome");
     welcome.addClass('disappear');
     welcomeButton.addClass('disappear');
     welcome.id('remove');
@@ -189,7 +274,7 @@ function buttonPress() {
 }
 
 function nextSong() {
-    clear();
+    cnv.clear();
     if (song.isPlaying()) {
         song.pause();
     }
@@ -206,7 +291,7 @@ function nextSong() {
 }
 
 function previousSong() {
-    clear();
+    cnv.clear();
     if (song.isPlaying()) {
         song.pause();
     }
