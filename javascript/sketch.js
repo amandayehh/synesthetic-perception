@@ -1,10 +1,12 @@
 var vw, wh, song, songs, newSong, loaded, nextButtonPressed, songName, songNames, displayN, fft, amplitude, peakDetect, spectrum, level, pTreble, treble, highmid, pMid, mid, lowmid, bass, centroid;
-let playButton, nextButton;
+let playButton, nextButton, welcome, loading, welcomeButton, welcomeClick;
 var highX, highY, midX, midY, midW;
 let blob;
 let currentN, nextN, pauseSVG, playSVG;
 
 function preload() {
+    welcomeButton = select('.welcome_button')
+
     blob = loadImage('images/blob1.png');
 
     song1 = loadSound('music/Interpretation 1.mp3');
@@ -13,6 +15,11 @@ function preload() {
     songs = [song1, song2, song3];
     currentN = 0;
     song = songs[currentN]
+
+    welcomeButton = select('.welcome_button')
+    welcomeClick = select('.welcome_click')
+    welcomeButton.hide();
+    welcomeClick.hide();
 }
 
 function setup() {
@@ -35,11 +42,19 @@ function setup() {
 
     nextButton = select('.next_button')
     previousButton = select('.previous_button')
+    loading = select('.welcome_loading')
+    welcome = select('.welcome')
+   
 
-    setSongName()
+    loading.hide();   
+    welcomeButton.show();
+ 
+    welcomeButton.addClass("fade-in")
+    welcomeClick.show();
 
+    welcome.mousePressed(startSong);
 
-
+    setSongName();
 
     pTreble = 0;
     pMid = 0;
@@ -67,11 +82,10 @@ function togglePlaying() {
         playSVG.hide();
         pauseSVG.show();
 
-    } else {
+    } else if (song.isPlaying()){
         song.pause();
         pauseSVG.hide();
         playSVG.show();
-
     }
 }
 
@@ -154,8 +168,22 @@ function draw() {
 
 }
 
-function buttonPress() {
+function startSong(){
+    console.log("welcome");
+    welcome.addClass('disappear');
+    welcomeButton.addClass('disappear');
+    welcome.id('remove');
+    welcomeButton.id('remove');
+    welcomeClick.id('remove');
 
+    welcomeClick.addClass('disappear');
+    setSongName();
+    song.play();
+    playSVG.hide();
+    pauseSVG.show();
+}
+
+function buttonPress() {
     nextButton.mousePressed(nextSong);
     previousButton.mousePressed(previousSong)
 }
@@ -172,8 +200,6 @@ function nextSong() {
     }
     song = songs[currentN];
     setSongName();
-
-
     song.play();
     playSVG.hide();
     pauseSVG.show();
@@ -191,10 +217,6 @@ function previousSong() {
     }
     song = songs[currentN];
     setSongName();
-
-
-    console.log(song)
-
     song.play();
     playSVG.hide();
     pauseSVG.show();

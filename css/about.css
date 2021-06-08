@@ -46,9 +46,11 @@
         width: 20em;
     }
 
-    .bottom_content {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row-reverse;
+    .credits {
+        margin-bottom: 0px;
+    }
+
+    .about_bottom_content {
+        align-items: baseline;
     }
 }

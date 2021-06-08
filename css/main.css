@@ -35,6 +35,15 @@ h2 {
 }
 
 h3 {
+    font-family: Monument Extended;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 0.8em;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+
+h4 {
     font-family: "Test Founders Grotesk Text";
     font-size: 1em;
     font-style: normal;
@@ -73,14 +82,22 @@ a>p {
     display: inline;
 }
 
-h3>a {
+h4>a {
     text-decoration: underline;
 }
 
+.hide {
+    display: none;
+}
 
-.dissapear {
+.disappear {
+    transition-duration: 1s;
     opacity: 0;
-    transform: translateY(2em);
+}
+
+#remove {
+    cursor: default;
+    z-index: -20;
 }
 
 .fade-in {
@@ -88,25 +105,19 @@ h3>a {
     transition-duration: 1s;
 }
 
-
-
-
-/* .header_about:hover {
-    padding-top: 0.5em;
-} */
-
 .bottom_nav {
-    bottom: 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-top: 16px;
 }
 
 .divider {
     height: 1px;
     width: 100%;
     background-color: white;
-    margin: 16px 0;
+    margin: 0px;
+    margin-top: 16px;
 }
 
 .bold {
@@ -159,4 +170,9 @@ h3>a {
         margin-left: 2em;
     }
 
+    .bottom_content {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
 }
