@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/container.css">
     <link rel="stylesheet" href="css/exhibits.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 
 </head>
 
@@ -25,20 +27,34 @@
 
         <div class="interpretations_imgs">
             <a href="a.html">
-                <img class="interpretations_img" id="a" src="images/exhibits/A.png"
+                <img class="interpretations_img img_A" id="a" src="images/exhibits/A.png"
+                    alt="old school televesion showing red screen on hover">
+                <img class="interpretations_img img_A_hover" id="a" src="images/exhibits/A hover.png"
                     alt="old school televesion showing red screen on hover">
             </a>
             <a href="b.html">
-                <img class="interpretations_img" id="b" src="images/exhibits/B.png" alt="a flashlight">
+                <img class="interpretations_img img_B" id="b" src="images/exhibits/B.png" alt="a flashlight">
+                <img class="interpretations_img img_B_hover" id="b" src="images/exhibits/B Hover.png"
+                    alt="a flashlight">
+
             </a>
             <a href="c.html">
-                <img class="interpretations_img" id="c" src="images/exhibits/C.png" alt="a flashlight">
+                <img class="interpretations_img img_C" id="c" src="images/exhibits/C.png" alt="a steroscope">
+                <img class="interpretations_img img_C_hover" id="c" src="images/exhibits/C Hover.png"
+                    alt="a steroscope">
             </a>
             <a href="d.html">
-                <img class="interpretations_img" id="d" src="images/exhibits/D.png" alt="an old school IBM termnial">
+                <img class="interpretations_img img_D" id="d" src="images/exhibits/D.png"
+                    alt="an old school IBM termnial">
+                <img class="interpretations_img img_D_hover" id="c" src="images/exhibits/D Hover.png"
+                    alt="an old school IBM termnial">
+
             </a>
             <a href="e.html">
-                <img class="interpretations_img" id="e" src="images/exhibits/E.png" alt="a blank poster">
+                <img class="interpretations_img img_E" id="e" src="images/exhibits/E.png" alt="a blank poster">
+                <img class="interpretations_img img_E_hover" id="e" src="images/exhibits/E Hover.png"
+                    alt="a blank poster">
+
             </a>
         </div>
 
@@ -58,5 +74,64 @@
         </div>
     </div>
 </body>
+
+<script>
+    $(".img_A_hover").hide();
+    $(".img_B_hover").hide();
+    $(".img_C_hover").hide();
+    $(".img_D_hover").hide();
+    $(".img_E_hover").hide();
+
+    $(".img_A").mouseenter(function () {
+        $(".img_A").toggle();
+        $(".img_A_hover").toggle();
+    });
+
+    $(".img_A_hover").mouseleave(function () {
+        $(".img_A").toggle();
+        $(".img_A_hover").toggle();
+    });
+
+    $(".img_B").mouseenter(function () {
+        $(".img_B").toggle();
+        $(".img_B_hover").toggle();
+    });
+
+    $(".img_B_hover").mouseleave(function () {
+        $(".img_B").toggle();
+        $(".img_B_hover").toggle();
+    });
+
+    $(".img_C").mouseenter(function () {
+        $(".img_C").toggle();
+        $(".img_C_hover").toggle();
+    });
+
+    $(".img_C_hover").mouseleave(function () {
+        $(".img_C").toggle();
+        $(".img_C_hover").toggle();
+    });
+
+    $(".img_D").mouseenter(function () {
+        $(".img_D").toggle();
+        $(".img_D_hover").toggle();
+    });
+
+    $(".img_D_hover").mouseleave(function () {
+        $(".img_D").toggle();
+        $(".img_D_hover").toggle();
+    });
+
+    $(".img_E").mouseenter(function () {
+        $(".img_E").toggle();
+        $(".img_E_hover").toggle();
+
+    });
+
+    $(".img_E_hover").mouseleave(function () {
+        $(".img_E").toggle();
+        $(".img_E_hover").toggle();
+    });
+</script>
 
 </html>
