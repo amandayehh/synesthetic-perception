@@ -13,14 +13,14 @@ function preload() {
     // blob = loadImage('images/ƒ.png');
     red = loadImage('images/blobs/red.png');
     orange = loadImage('images/blobs/orange.png');
-    yellow = loadImage('images/blobs/yellow.png');
-    lightGreen = loadImage('images/blobs/light green.png');
+    // yellow = loadImage('images/blobs/yellow.png');
+    // lightGreen = loadImage('images/blobs/light green.png');
     green = loadImage('images/blobs/green.png');
-    lightBlue = loadImage('images/blobs/light blue.png');
+    // lightBlue = loadImage('images/blobs/light blue.png');
     blue = loadImage('images/blobs/blue.png');
     purple = loadImage('images/blobs/purple.png');
-    pink = loadImage('images/blobs/pink.png');
-    white = loadImage('images/blobs/white.png');
+    // pink = loadImage('images/blobs/pink.png');
+    // white = loadImage('images/blobs/white.png');
 
     glitch1 = loadImage('images/glitches/glitch01.png');
     glitch2 = loadImage('images/glitches/glitch02.png');
