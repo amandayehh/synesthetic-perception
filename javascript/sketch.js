@@ -263,13 +263,11 @@ function generateBlobs(f, pf, addDiff, decreaseDiff, xs,ys,ws, color){
     }
 
     for (let i = 0; i < xs.length; i++) {
-        console.log(width>height);
 
         if(width>height){
             image(color, xs[i], ys[i], width*0.8 + map(f, 0,255, 0,width), width*0.8+ map(f, 0,255, 0,width));
 
         }else{
-            console.log("tall")
             image(color, xs[i], ys[i], height*0.8 + map(f, 0,255, 0,height), height*0.8+ map(f, 0,255, 0,height));
         }
         
