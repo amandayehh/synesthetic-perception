@@ -61,6 +61,15 @@ body {
     width: 100%;
 }
 
+.welcome_sound {
+    position: absolute;
+    text-align: center;
+    width: calc(100vw - var(--small-container)*2);
+    margin: var(--small-container);
+}
+
+
+
 .welcome_button {
     position: absolute;
     text-align: center;
@@ -84,7 +93,7 @@ body {
     position: absolute;
     text-align: center;
     width: 100%;
-    bottom: calc(var(--small-container) + 1em);
+    bottom: calc(var(--small-container) + 0.7em);
     -webkit-animation: twinkle 1s infinite alternate;
     /* Safari 4+ */
     -moz-animation: twinkle 1s infinite alternate;
@@ -167,10 +176,15 @@ body {
         background-color: black;
     }
 
+    .welcome_sound {
+        width: calc(100vw - var(--large-container)*2);
+        margin: var(--large-container);
+    }
+
 
     .welcome_button {
         width: auto;
-        margin-top: calc((100vh - 9em) / 2);
+        margin-top: calc((100vh - 3.5em) / 2);
         left: calc((100vw - var(--large-container))/ 2 - 10.8em);
     }
 
@@ -178,7 +192,7 @@ body {
         position: absolute;
         text-align: center;
         width: 100%;
-        bottom: calc(var(--large-container) + 1em);
+        bottom: calc(var(--large-container) + 0.7em);
         -webkit-animation: twinkle 1s infinite alternate;
         /* Safari 4+ */
         -moz-animation: twinkle 1s infinite alternate;

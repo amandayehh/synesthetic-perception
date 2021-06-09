@@ -21,6 +21,10 @@
     margin-bottom: 3em;
 }
 
+.text2 {
+    margin-bottom: 1.8em;
+}
+
 .credits {
     margin-bottom: 8px;
     opacity: 60%;
@@ -46,11 +50,16 @@
         width: 20em;
     }
 
+
+    .text2 {
+        margin-bottom: 0;
+    }
+
     .credits {
-        transform: translateY(-0.2em);
+        transform: 0;
     }
 
     .about_bottom_content {
-        align-items: baseline;
+        align-items: center;
     }
 }

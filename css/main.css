@@ -32,8 +32,32 @@ body {
     overflow-x: hidden;
 }
 
+#p5_loading {
+    display: none;
+}
+
+canvas {
+    z-index: -5 !important;
+    position: absolute !important;
+    top: 0px !important;
+    left: 0px !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+#defaultCanvas0 {
+    z-index: -5 !important;
+    position: absolute !important;
+    top: 0px !important;
+    left: 0px !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
 .container {
+    height: calc(100vh + 16px);
     padding: var(--small-container);
+    padding-bottom: 0;
 }
 
 h1 {
@@ -119,17 +143,16 @@ h4>a {
     animation-delay: 1s forwards;
 }
 
-.delay_2 {
+.appear {
     opacity: 0;
-    -webkit-animation: twinkle 1s 1s;
+    -webkit-animation: twinkle 1s forwards;
 
     /* Safari 4+ */
-    -moz-animation: twinkle 1s 1s;
+    -moz-animation: twinkle 1s forwards;
     /* Fx 5+ */
-    -o-animation: twinkle 1s 1s;
+    -o-animation: twinkle 1s forwards;
     /* Opera 12+ */
-    animation: twinkle 1s 1s;
-    animation-delay: 1s;
+    animation: twinkle 1s forwards;
 }
 
 .hide {
@@ -151,11 +174,16 @@ h4>a {
     transition-duration: 1s;
 }
 
+.bottom {
+    transform: translateY(16px);
+}
+
 .bottom_nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 16px;
+    padding-bottom: 16px;
 }
 
 .divider {
@@ -223,7 +251,7 @@ h4>a {
 @media screen and (min-width: 525px) {
     .container {
         padding: var(--large-container);
-
+        padding-bottom: 0;
     }
 
     .header {

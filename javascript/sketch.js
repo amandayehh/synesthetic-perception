@@ -37,6 +37,7 @@ function preload() {
     song1 = loadSound('music/Interpretation 1.wav');
     song2 = loadSound('music/Interpretation 2.wav');
     song3 = loadSound('music/Interpretation 3.wav');
+
     songs = [song1, song2, song3];
     currentN = 0;
     song = songs[currentN]
@@ -55,6 +56,7 @@ function setup() {
 
     wv = windowWidth;
     vh = windowHeight;
+    console.log(windowHeight);
     cnv = createCanvas(windowWidth, windowHeight);
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
