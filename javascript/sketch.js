@@ -1,4 +1,4 @@
-var vw, wh, song, songs, blobs, newSong, loaded, nextButtonPressed, songName, songNames, displayN, fft, amplitude, peakDetect, spectrum, level, treble, highMid, mid, lowMid, bass, centroid;
+var vw, wh, song, songs, blobs, newSong, loaded, nextButtonPressed, songName, songNames, displayN, fft, amplitude, peakDetect, spectrum, level, treble, highMid, mid, lowMid, bass, centroid, centroidH, volumeS, volumeB;
 let playButton, nextButton, welcome, loading, welcomeButton, welcomeClick, header, content;
 var pBass, pLowMid, pMid, pHighMid, pTreble;
 var bassX, bassY, bassW, midX, lowMidX, lowMidY,lowMidW, midY, midW, highMidX, highMidY, highMidW, trebleX, trebleY, trebleW, highBarX, highBarY, highBarH,highBarW, highBarGlitch;
@@ -49,6 +49,7 @@ function preload() {
 
     header = select('.header')
     content = select('.bottom')
+
 
 }
 
@@ -181,9 +182,21 @@ function draw() {
         peakDetect.update(fft);
         centroid = fft.getCentroid();
         colorMode(HSB, 360);
-        background(map(centroid, 900,10000,0,360),65,20);
+        centroidH = map(centroid, 900,10000,0,300);
 
+        if(level< 0.25){
+            volumeB = map(level, 0, 0.25, 5, 40);
+        }else{
+            console.log(level)
 
+            volumeB = map(level, 0.25, 0.5, 40, 60);
+        }
+      
+        volumeS = map(level, 0, 0.4, 300, 240);
+
+        volumeB = map(level, 0, 0.4, 0, 80);
+
+        background(centroidH,300,40);
         //mids
         generateBlobs(bass, pBass, 20, 4, bassX,bassY,bassW, red);
         generateBlobs(lowMid, pLowMid, 19, 4, lowMidX,lowMidY,lowMidW, orange);
@@ -197,13 +210,13 @@ function draw() {
 
 
         // bass
-        if(bass > 150){
-            fill(map(centroid, 900,10000,0,360),65,20, map(bass, 150, 220, 240, 190))
+        if(bass > 120){
+            fill(centroidH,65,20, map(bass, 120, 220, 190, 120))
         }
         else if (bass > 220) {
-            fill(map(centroid, 900,10000,0,360),65,20, map(bass, 180, 255, 190, 50))
+            fill(centroidH,65,20, map(bass, 180, 255, 120, 50))
         } else {
-            fill(map(centroid, 900,10000,0,360),65,20,map(bass, 0, 150, 255, 240))
+            fill(centroidH,65,20,map(bass, 0, 150, 230, 190))
         }
         rect(0, 0, width, height)
 
