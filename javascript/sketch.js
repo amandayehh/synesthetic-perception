@@ -194,7 +194,7 @@ function draw() {
       
         volumeS = map(level, 0, 0.4, 300, 240);
 
-        volumeB = map(level, 0, 0.4, 20, 100);
+        volumeB = map(level, 0, 0.4, 20, 80);
 
         background(centroidH,300,volumeB);
         //mids
