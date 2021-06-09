@@ -119,15 +119,15 @@ h4>a {
 
 .delay_2 {
     opacity: 0;
-    -webkit-animation: twinkle 1s 2s;
+    -webkit-animation: twinkle 1s 1s;
 
     /* Safari 4+ */
-    -moz-animation: twinkle 1s 2s;
+    -moz-animation: twinkle 1s 1s;
     /* Fx 5+ */
-    -o-animation: twinkle 1s 2s;
+    -o-animation: twinkle 1s 1s;
     /* Opera 12+ */
-    animation: twinkle 1s 2s;
-    animation-delay: 2s;
+    animation: twinkle 1s 1s;
+    animation-delay: 1s;
 }
 
 .hide {
