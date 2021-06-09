@@ -57,7 +57,6 @@ function setup() {
 
     wv = windowWidth;
     vh = windowHeight;
-    console.log(windowHeight);
     cnv = createCanvas(windowWidth, windowHeight);
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
@@ -187,14 +186,12 @@ function draw() {
         if(level< 0.25){
             volumeB = map(level, 0, 0.25, 5, 40);
         }else{
-            console.log(level)
-
-            volumeB = map(level, 0.25, 0.5, 40, 80);
+            volumeB = map(level, 0.25, 0.5, 40, 100);
         }
       
         volumeS = map(level, 0, 0.4, 300, 240);
 
-        volumeB = map(level, 0, 0.4, 20, 80);
+        volumeB = map(level, 0, 0.4, 20, 100);
 
         background(centroidH,300,volumeB);
         //mids
@@ -211,12 +208,12 @@ function draw() {
 
         // bass
         if(bass > 120){
-            fill(centroidH,300,20, map(bass, 120, 220, 190, 120))
+            fill(centroidH,300,20, map(bass, 120, 220, 210, 140))
         }
         else if (bass > 220) {
-            fill(centroidH,300,20, map(bass, 180, 255, 120, 50))
+            fill(centroidH,300,20, map(bass, 180, 255, 140, 50))
         } else {
-            fill(centroidH,300,20,map(bass, 0, 150, 230, 190))
+            fill(centroidH,300,20,map(bass, 0, 150, 255, 210))
         }
         rect(0, 0, width, height)
 
