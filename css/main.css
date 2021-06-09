@@ -16,6 +16,7 @@
         url("../fonts/founders-grotesk-text-web-regular.woff") format("woff");
 }
 
+
 :root {
     --small-container: 14px;
     --large-container: 24px;
