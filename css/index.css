@@ -1,6 +1,5 @@
 body {
-    overflow: hidden;
-
+    overflow: scroll;
 }
 
 .index {
