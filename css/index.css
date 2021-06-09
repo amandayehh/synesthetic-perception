@@ -151,6 +151,10 @@ body {
 
 
 @media screen and (min-width: 525px) {
+    body {
+        overflow: hidden;
+    }
+
     .index {
         height: calc(100vh - var(--large-container) * 2);
     }
