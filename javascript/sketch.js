@@ -207,13 +207,20 @@ function draw() {
 
 
         // bass
-        if(bass > 120){
-            fill(centroidH,300,20, map(bass, 120, 220, 210, 140))
+
+        if(bass > 140){
+            console.log(bass)
+
+            fill(centroidH,300,0, map(bass, 120, 220, 100, 200))
+
         }
         else if (bass > 220) {
-            fill(centroidH,300,20, map(bass, 180, 255, 140, 50))
+            console.log(bass)
+
+            fill(centroidH,300,0, map(bass, 180, 255, 200, 330))
+
         } else {
-            fill(centroidH,300,20,map(bass, 0, 150, 255, 210))
+            fill(centroidH,300,0,map(bass, 0, 150, 0, 100))
         }
         rect(0, 0, width, height)
 
