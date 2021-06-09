@@ -104,6 +104,32 @@ h4>a {
     text-decoration: underline;
 }
 
+.delay {
+    opacity: 0;
+    -webkit-animation: twinkle 1s 1s;
+
+    /* Safari 4+ */
+    -moz-animation: twinkle 1s 1s;
+    /* Fx 5+ */
+    -o-animation: twinkle 1s 1s;
+    /* Opera 12+ */
+    animation: twinkle 1s 1s;
+    animation-delay: 1s;
+}
+
+.delay_2 {
+    opacity: 0;
+    -webkit-animation: twinkle 1s 2s;
+
+    /* Safari 4+ */
+    -moz-animation: twinkle 1s 2s;
+    /* Fx 5+ */
+    -o-animation: twinkle 1s 2s;
+    /* Opera 12+ */
+    animation: twinkle 1s 2s;
+    animation-delay: 2s;
+}
+
 .hide {
     display: none;
 }
@@ -144,6 +170,52 @@ h4>a {
 
 .label {
     opacity: 60%;
+}
+
+
+
+@-webkit-keyframes twinkle {
+    0% {
+        opacity: 0;
+    }
+
+
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes twinkle {
+    0% {
+        opacity: 0;
+    }
+
+
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes twinkle {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @media screen and (min-width: 525px) {
