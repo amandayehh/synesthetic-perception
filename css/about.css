@@ -47,7 +47,7 @@
     }
 
     .credits {
-        margin-bottom: 0px;
+        transform: translateY(-0.2em);
     }
 
     .about_bottom_content {

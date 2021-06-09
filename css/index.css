@@ -1,9 +1,22 @@
+body {
+    overflow: hidden;
+
+}
+
 .index {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     height: calc(100vh - var(--small-container) * 2);
-    overflow: hidden;
+}
+
+.header {
+    transition-duration: 2s;
+}
+
+.content {
+    transition-duration: 2s;
+
 }
 
 .exhibit {
@@ -158,7 +171,7 @@
     .welcome_button {
         width: auto;
         margin-top: calc((100vh - 9em) / 2);
-        left: calc((100vw - var(--large-container))/ 2 - 11em);
+        left: calc((100vw - var(--large-container))/ 2 - 10.8em);
     }
 
     .welcome_click {

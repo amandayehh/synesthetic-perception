@@ -1,5 +1,5 @@
 var vw, wh, song, songs, blobs, newSong, loaded, nextButtonPressed, songName, songNames, displayN, fft, amplitude, peakDetect, spectrum, level, treble, highMid, mid, lowMid, bass, centroid;
-let playButton, nextButton, welcome, loading, welcomeButton, welcomeClick;
+let playButton, nextButton, welcome, loading, welcomeButton, welcomeClick, header, content;
 var pBass, pLowMid, pMid, pHighMid, pTreble;
 var bassX, bassY, bassW, midX, lowMidX, lowMidY,lowMidW, midY, midW, highMidX, highMidY, highMidW, trebleX, trebleY, trebleW, highBarX, highBarY, highBarH,highBarW, highBarGlitch;
 let blob, red, orange, yellow,lightGreen, green, lightBlue, blue, purple, pink, white;
@@ -45,6 +45,10 @@ function preload() {
     welcomeClick = select('.welcome_click')
     welcomeButton.hide();
     welcomeClick.hide();
+
+    header = select('.header')
+    content = select('.bottom')
+
 }
 
 function setup() {
@@ -117,7 +121,6 @@ function setup() {
     highBarW=[];
     highBarGlitch = [];
 
-    imageMode(CORNER);
     buttonPress();
 
     pauseSVG = select('.pause')
@@ -125,6 +128,7 @@ function setup() {
 
     pauseSVG.hide();
 
+    imageMode(CENTER);
 
 }
 
@@ -180,22 +184,24 @@ function draw() {
 
         //mids
         generateBlobs(bass, pBass, 20, 4, bassX,bassY,bassW, red);
-        generateBlobs(lowMid, pLowMid, 16, 4, lowMidX,lowMidY,lowMidW, orange);
+        generateBlobs(lowMid, pLowMid, 19, 4, lowMidX,lowMidY,lowMidW, orange);
 
         generateBlobs(mid, pMid, 20, 4, midX,midY,midW, green);
 
-        generateBlobs(highMid, pHighMid, 25, 4, highMidX,highMidY,highMidW, blue);
+        generateBlobs(highMid, pHighMid, 20, 4, highMidX,highMidY,highMidW, blue);
 
         generateBlobs(treble, pTreble, 20, 4, trebleX,trebleY,trebleW, purple);
 
 
 
         // bass
-        if (bass > 180) {
-           
-            fill(map(centroid, 900,10000,0,360),65,20, map(bass, 180, 255, 255, 50))
+        if(bass > 150){
+            fill(map(centroid, 900,10000,0,360),65,20, map(bass, 150, 220, 240, 190))
+        }
+        else if (bass > 220) {
+            fill(map(centroid, 900,10000,0,360),65,20, map(bass, 180, 255, 190, 50))
         } else {
-            fill(map(centroid, 900,10000,0,360),65,20,0)
+            fill(map(centroid, 900,10000,0,360),65,20,map(bass, 0, 150, 255, 240))
         }
         rect(0, 0, width, height)
 
@@ -231,14 +237,23 @@ function draw() {
 
 function generateBlobs(f, pf, addDiff, decreaseDiff, xs,ys,ws, color){
     if (f > pf + addDiff) {
+        // if(height < width){
+        //     xs.push(random((width/2*-1),width));
+        //     ys.push(random((height*-1),height));
+        //     ws.push(random(height, width*2));
+        // }else{
+        //     xs.push(random((width*-1),width));
+        //     ys.push(random((width*-1),height));
+        //     ws.push(random(height, width*2));
+        // }
         if(height < width){
-            xs.push(random((height*-1),width));
-            ys.push(random((height*-1),height));
-            ws.push(random(height, width*2));
-        }else{
-            xs.push(random((width*-1),width));
-            ys.push(random((width*-1),height));
-            ws.push(random(height, width*2));
+        xs.push(random((width/3*-1),width));
+        ys.push(random((width/3*-1),height));
+        ws.push(random(height, width*2));
+        }else {
+            xs.push(random((height/3*-1),width));
+            ys.push(random((height/3*-1),height));
+            ws.push(random(height, height*2));
         }
        
     } else if (f < pf - decreaseDiff) {
@@ -248,9 +263,16 @@ function generateBlobs(f, pf, addDiff, decreaseDiff, xs,ys,ws, color){
     }
 
     for (let i = 0; i < xs.length; i++) {
+        console.log(width>height);
 
-        image(color, xs[i], ys[i], ws[i], ws[i]);
+        if(width>height){
+            image(color, xs[i], ys[i], width*0.8 + map(f, 0,255, 0,width), width*0.8+ map(f, 0,255, 0,width));
 
+        }else{
+            console.log("tall")
+            image(color, xs[i], ys[i], height*0.8 + map(f, 0,255, 0,height), height*0.8+ map(f, 0,255, 0,height));
+        }
+        
     }
 }
 
@@ -262,6 +284,10 @@ function startSong(){
     welcomeClick.id('remove');
 
     welcomeClick.addClass('disappear');
+
+    header.addClass('delay');
+    content.addClass('delay');
+
     setSongName();
     song.play();
     playSVG.hide();

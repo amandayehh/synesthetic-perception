@@ -104,17 +104,19 @@ h4>a {
     text-decoration: underline;
 }
 
+
+
 .delay {
     opacity: 0;
-    -webkit-animation: twinkle 1s 1s;
+    -webkit-animation: twinkle 1s 1s forwards;
 
     /* Safari 4+ */
-    -moz-animation: twinkle 1s 1s;
+    -moz-animation: twinkle 1s 1s forwards;
     /* Fx 5+ */
-    -o-animation: twinkle 1s 1s;
+    -o-animation: twinkle 1s 1s forwards;
     /* Opera 12+ */
-    animation: twinkle 1s 1s;
-    animation-delay: 1s;
+    animation: twinkle 1s 1s forwards;
+    animation-delay: 1s forwards;
 }
 
 .delay_2 {
@@ -221,6 +223,7 @@ h4>a {
 @media screen and (min-width: 525px) {
     .container {
         padding: var(--large-container);
+
     }
 
     .header {
