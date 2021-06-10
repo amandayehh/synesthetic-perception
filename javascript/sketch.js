@@ -184,14 +184,14 @@ function draw() {
         centroidH = map(centroid, 900,10000,0,330);
 
         if(level< 0.25){
-            volumeB = map(level, 0, 0.25, 5, 40);
+            volumeB = map(level, 0, 0.25, 30, 120);
         }else{
-            volumeB = map(level, 0.25, 0.5, 40, 100);
+            volumeB = map(level, 0.25, 0.5, 120, 220);
         }
       
         volumeS = map(level, 0, 0.4, 300, 240);
 
-        volumeB = map(level, 0, 0.4, 20, 100);
+        // volumeB = map(level, 0, 0.4, 20, 160);
 
         background(centroidH,300,volumeB);
         //mids
@@ -208,19 +208,15 @@ function draw() {
 
         // bass
 
-        if(bass > 140){
-            console.log(bass)
-
-            fill(centroidH,300,0, map(bass, 120, 220, 100, 200))
+        if(bass > 160){
+            fill(centroidH,300,0, map(bass, 120, 220, 40, 190))
 
         }
-        else if (bass > 220) {
-            console.log(bass)
-
-            fill(centroidH,300,0, map(bass, 180, 255, 200, 330))
+        else if (bass > 200) {
+            fill(centroidH,300,0, map(bass, 180, 255, 190, 360))
 
         } else {
-            fill(centroidH,300,0,map(bass, 0, 150, 0, 100))
+            fill(centroidH,300,0,map(bass, 0, 150, 0, 40))
         }
         rect(0, 0, width, height)
 
