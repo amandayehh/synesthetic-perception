@@ -186,7 +186,7 @@ function draw() {
         if(level< 0.25){
             volumeB = map(level, 0, 0.25, 30, 120);
         }else{
-            volumeB = map(level, 0.25, 0.5, 120, 220);
+            volumeB = map(level, 0.25, 0.5, 120, 200);
         }
       
         volumeS = map(level, 0, 0.4, 300, 240);
@@ -209,14 +209,14 @@ function draw() {
         // bass
 
         if(bass > 160){
-            fill(centroidH,300,0, map(bass, 120, 220, 40, 190))
+            fill(centroidH,300,20, map(bass, 120, 220, 40, 190))
 
         }
         else if (bass > 200) {
-            fill(centroidH,300,0, map(bass, 180, 255, 190, 360))
+            fill(centroidH,300,20, map(bass, 180, 255, 190, 360))
 
         } else {
-            fill(centroidH,300,0,map(bass, 0, 150, 0, 40))
+            fill(centroidH,300,20,map(bass, 0, 150, 0, 40))
         }
         rect(0, 0, width, height)
 
@@ -238,8 +238,6 @@ function draw() {
         }
 
         for (let i = 0; i < highBarX.length; i++) {
-            fill(map(treble, 90, 170, 0, 255));
-
             push();
             blendMode(SCREEN);
             image(highBarGlitch[i], highBarX[i], highBarY[i], highBarW, highBarH[i]);
