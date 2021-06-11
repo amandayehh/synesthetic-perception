@@ -183,10 +183,10 @@ function draw() {
         colorMode(HSB, 360);
         centroidH = map(centroid, 900,10000,0,330);
 
-        if(level< 0.25){
-            volumeB = map(level, 0, 0.25, 30, 120);
+        if(level< 0.2){
+            volumeB = map(level, 0, 0.25, 50, 150);
         }else{
-            volumeB = map(level, 0.25, 0.5, 120, 200);
+            volumeB = map(level, 0.25, 0.5, 150, 250);
         }
       
         volumeS = map(level, 0, 0.4, 300, 240);
