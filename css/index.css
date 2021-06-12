@@ -58,6 +58,14 @@ body {
     text-align: center;
     bottom: calc(100vh / 2);
     width: 100%;
+    -webkit-animation: twinkle 1s infinite alternate;
+    /* Safari 4+ */
+    -moz-animation: twinkle 1s infinite alternate;
+    /* Fx 5+ */
+    -o-animation: twinkle 1s infinite alternate;
+    /* Opera 12+ */
+    animation: twinkle 1s infinite alternate;
+    /* IE 10+, Fx 29+ */
 }
 
 .welcome_sound {
