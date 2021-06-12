@@ -195,10 +195,11 @@ function draw() {
 
         background(centroidH,300,volumeB);
         //mids
-        generateBlobs(bass, pBass, 20, 4, bassX,bassY,bassW, red);
         generateBlobs(lowMid, pLowMid, 19, 4, lowMidX,lowMidY,lowMidW, orange);
-
         generateBlobs(mid, pMid, 20, 4, midX,midY,midW, green);
+
+        generateBlobs(bass, pBass, 20, 4, bassX,bassY,bassW, red);
+
 
         generateBlobs(highMid, pHighMid, 20, 4, highMidX,highMidY,highMidW, blue);
 
