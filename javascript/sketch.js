@@ -37,8 +37,10 @@ function preload() {
     song1 = loadSound('music/Interpretation 1.wav');
     song2 = loadSound('music/Interpretation 2.wav');
     song3 = loadSound('music/Interpretation 3.wav');
+    song4 = loadSound('music/too fast.mp3');
 
-    songs = [song1, song2, song3];
+
+    songs = [song1, song2, song3, song4];
     currentN = 0;
     song = songs[currentN]
 
@@ -176,7 +178,7 @@ function draw() {
         pLowMid=lowMid
         lowMid = fft.getEnergy('lowMid');
         pBass = bass;
-        bass = fft.getEnergy('bass');
+        bass = fft.getEnergy(20);
 
 
         peakDetect.update(fft);
@@ -184,22 +186,22 @@ function draw() {
         colorMode(HSB, 360);
         centroidH = map(centroid, 900,10000,0,330);
 
-        if(level< 0.2){
-            volumeB = map(level, 0, 0.3, 50, 150);
+        if(level< 0.4){
+            volumeB = map(level, 0, 0.4, 50, 100);
         }else{
-            volumeB = map(level, 0.3, 0.6, 150, 250);
+            volumeB = map(level, 0.4, 0.6, 100, 250);
         }
       
         volumeS = map(level, 0, 0.4, 300, 240);
 
         // volumeB = map(level, 0, 0.4, 20, 160);
 
-        background(centroidH,300,volumeB);
+        background(centroidH,280,volumeB);
         //mids
         generateBlobs(lowMid, pLowMid, 19, 4, lowMidX,lowMidY,lowMidW, orange);
         generateBlobs(mid, pMid, 20, 4, midX,midY,midW, green);
 
-        generateBlobs(bass, pBass, 20, 4, bassX,bassY,bassW, red);
+        generateBlobs(bass, pBass, 20, 5, bassX,bassY,bassW, red);
 
 
         generateBlobs(highMid, pHighMid, 20, 4, highMidX,highMidY,highMidW, blue);
@@ -210,15 +212,15 @@ function draw() {
 
         // bass
 
-        if(bass > 160){
-            fill(centroidH,300,20, map(bass, 120, 220, 40, 190))
+        if(bass > 120){
+            fill(centroidH,300,20, map(bass, 140, 220, 90, 150))
 
         }
-        else if (bass > 200) {
-            fill(centroidH,300,20, map(bass, 180, 255, 190, 360))
+        else if (bass > 220) {
+            fill(centroidH,300,20, map(bass, 220, 255, 150, 360))
 
         } else {
-            fill(centroidH,300,20,map(bass, 0, 150, 0, 40))
+            fill(centroidH,300,20,map(bass, 0, 140, 40, 90))
         }
         rect(0, 0, width, height)
 
@@ -242,7 +244,7 @@ function draw() {
         for (let i = 0; i < highBarX.length; i++) {
             push();
             blendMode(SCREEN);
-            image(highBarGlitch[i], highBarX[i], highBarY[i], highBarW, highBarH[i]);
+            image(highBarGlitch[i], highBarX[i], highBarY[i], highBarW[i], highBarH[i]);
             pop();
 
         }
