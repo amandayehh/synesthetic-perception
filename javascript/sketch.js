@@ -38,7 +38,7 @@ function preload() {
     song2 = loadSound('music/Interpretation 2.wav');
     song3 = loadSound('music/Interpretation 3.wav');
 
-    songs = [song1, song2, song3];
+    songs = [song1, song2, song3, song4];
     currentN = 0;
     song = songs[currentN]
 
@@ -176,7 +176,8 @@ function draw() {
         pLowMid=lowMid
         lowMid = fft.getEnergy('lowMid');
         pBass = bass;
-        bass = fft.getEnergy(16);
+        bass = fft.getEnergy('bass');
+
 
         peakDetect.update(fft);
         centroid = fft.getCentroid();
@@ -184,9 +185,9 @@ function draw() {
         centroidH = map(centroid, 900,10000,0,330);
 
         if(level< 0.2){
-            volumeB = map(level, 0, 0.25, 50, 150);
+            volumeB = map(level, 0, 0.3, 50, 150);
         }else{
-            volumeB = map(level, 0.25, 0.5, 150, 250);
+            volumeB = map(level, 0.3, 0.6, 150, 250);
         }
       
         volumeS = map(level, 0, 0.4, 300, 240);
