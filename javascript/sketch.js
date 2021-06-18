@@ -38,7 +38,7 @@ function preload() {
     song2 = loadSound('music/Interpretation 2.wav');
     song3 = loadSound('music/Interpretation 3.wav');
 
-    songs = [song1, song2, song3, song4];
+    songs = [song1, song2, song3];
     currentN = 0;
     song = songs[currentN]
 
