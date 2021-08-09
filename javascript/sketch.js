@@ -134,8 +134,6 @@ function setup() {
   amplitude = new p5.Amplitude();
   peakDetect = new p5.PeakDetect();
 
-  nextButton = select(".next_button");
-  previousButton = select(".previous_button");
   loading = select(".welcome_loading");
   welcome = select(".welcome");
 
@@ -147,7 +145,6 @@ function setup() {
 
   welcome.mousePressed(startSong);
 
-  setSongName();
 
   pBass = 0;
   pLowMid = 0;
@@ -180,13 +177,6 @@ function setup() {
   highBarH = [];
   highBarW = [];
   highBarGlitch = [];
-
-  buttonPress();
-
-  pauseSVG = select(".pause");
-  playSVG = select(".play");
-
-  pauseSVG.hide();
 
   imageMode(CENTER);
 }
@@ -341,31 +331,4 @@ function startSong() {
   welcomeClick.id("remove");
 
   welcomeClick.addClass("disappear");
-
-  header.addClass("delay");
-  content.addClass("delay");
-
-  playSVG.hide();
-  pauseSVG.show();
-}
-
-function buttonPress() {
-
-}
-
-function nextSong() {
-  playSVG.hide();
-  pauseSVG.show();
-}
-
-function previousSong() {
-
-  playSVG.hide();
-  pauseSVG.show();
-}
-
-function setSongName() {
-  songName = select(".song");
-  displayN = currentN + 1;
-  songName.elt.innerText = "Interpretation " + displayN;
 }
