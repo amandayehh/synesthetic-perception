@@ -1,4 +1,5 @@
 var vw,
+  mic,
   wh,
   song,
   songs,
@@ -105,9 +106,6 @@ function preload() {
   welcomeClick = select(".welcome_click");
   welcomeButton.hide();
   welcomeClick.hide();
-
-  header = select(".header");
-  content = select(".bottom");
 }
 
 function setup() {
@@ -119,18 +117,11 @@ function setup() {
   cnv.position(x, y);
 
   //set mic
-  mic = new p5.AudioIn();
-  // start the Audio Input.
-  // By default, it does not .connect() (to the computer speakers)
-  mic.start();
 
   //song.setVolume(0.5);
   // loaded = false;
 
-  playButton = select(".play_button");
-  //playButton.mousePressed(togglePlaying);
   fft = new p5.FFT();
-  fft.setInput(mic);
   amplitude = new p5.Amplitude();
   peakDetect = new p5.PeakDetect();
 
@@ -178,6 +169,8 @@ function setup() {
   highBarW = [];
   highBarGlitch = [];
 
+
+
   imageMode(CENTER);
 }
 
@@ -187,143 +180,151 @@ function windowResized() {
 }
 
 function draw() {
-  // background(100)
-  // if(bass>100){
-  //     background(map(bass, 0, 255,100,0));
-  // }
-  smooth();
-
-  // background(0);
-  spectrum = fft.analyze();
-  level = mic.getLevel();
-  console.log(level);
-  pTreble = treble;
-  treble = fft.getEnergy("treble");
-  pHighMid = highMid;
-  highMid = fft.getEnergy("highMid");
-  pMid = mid;
-  mid = fft.getEnergy("mid");
-  pLowMid = lowMid;
-  lowMid = fft.getEnergy("lowMid");
-  pBass = bass;
-  bass = fft.getEnergy('bass');
-
-  peakDetect.update(fft);
-  centroid = fft.getCentroid();
-  colorMode(HSB, 360);
-  centroidH = map(centroid, 900, 10000, 0, 330);
-
-  if (level < 0.4) {
-    volumeB = map(level, 0, 0.4, 50, 100);
-  } else {
-    volumeB = map(level, 0.4, 0.6, 100, 250);
-  }
-
-  volumeS = map(level, 0, 0.4, 300, 240);
-
-  // volumeB = map(level, 0, 0.4, 20, 160);
-
-  background(centroidH, 280, volumeB);
-  //mids
-  generateBlobs(lowMid, pLowMid, 19, 4, lowMidX, lowMidY, lowMidW, orange);
-  generateBlobs(mid, pMid, 20, 4, midX, midY, midW, green);
-
-  generateBlobs(bass, pBass, 20, 5, bassX, bassY, bassW, red);
-
-  generateBlobs(highMid, pHighMid, 20, 4, highMidX, highMidY, highMidW, blue);
-
-  generateBlobs(treble, pTreble, 20, 4, trebleX, trebleY, trebleW, purple);
-
-  // bass
-
-  if (bass > 120) {
-    fill(centroidH, 300, 20, map(bass, 140, 220, 90, 150));
-  } else if (bass > 220) {
-    fill(centroidH, 300, 20, map(bass, 220, 255, 150, 360));
-  } else {
-    fill(centroidH, 300, 20, map(bass, 0, 140, 40, 90));
-  }
-  rect(0, 0, width, height);
-
-  //highs
-  //random X
-  if (treble > pTreble + 8 && treble > 90) {
-    highBarX.push(random(0, width - width / 3));
-    highBarY.push(random(0, height));
-    highBarH.push(random(5, 60));
-    highBarW.push(random(width / 3, width));
-    highBarGlitch.push(glitches[Math.floor(Math.random() * glitches.length)]);
-  } else if (treble < pTreble - 2) {
-    highBarX.pop();
-    highBarY.pop();
-    highBarH.pop();
-    highBarW.pop();
-    highBarGlitch.pop();
-  }
-
-  for (let i = 0; i < highBarX.length; i++) {
-    push();
-    blendMode(SCREEN);
-    image(
-      highBarGlitch[i],
-      highBarX[i],
-      highBarY[i],
-      highBarW[i],
-      highBarH[i]
-    );
-    pop();
-  }
-
-}
-
-function generateBlobs(f, pf, addDiff, decreaseDiff, xs, ys, ws, color) {
-  if (f > pf + addDiff) {
-    // if(height < width){
-    //     xs.push(random((width/2*-1),width));
-    //     ys.push(random((height*-1),height));
-    //     ws.push(random(height, width*2));
-    // }else{
-    //     xs.push(random((width*-1),width));
-    //     ys.push(random((width*-1),height));
-    //     ws.push(random(height, width*2));
+  if (mic != undefined) {
+    console.log("here")
+    // background(100)
+    // if(bass>100){
+    //     background(map(bass, 0, 255,100,0));
     // }
-    if (height < width) {
-      xs.push(random((width / 3) * -1, width));
-      ys.push(random((width / 3) * -1, height));
-      ws.push(random(height, width * 2));
+    smooth();
+
+    // background(0);
+    spectrum = fft.analyze();
+    fft.setInput(mic);
+
+    level = mic.getLevel();
+    pTreble = treble;
+    treble = fft.getEnergy("treble");
+    pHighMid = highMid;
+    highMid = fft.getEnergy("highMid");
+    pMid = mid;
+    mid = fft.getEnergy("mid");
+    pLowMid = lowMid;
+    lowMid = fft.getEnergy("lowMid");
+    pBass = bass;
+    bass = fft.getEnergy('bass');
+
+    peakDetect.update(fft);
+    centroid = fft.getCentroid();
+    colorMode(HSB, 360);
+    centroidH = map(centroid, 900, 10000, 0, 330);
+
+    if (level < 0.6) {
+      volumeB = map(level, 0, 0.4, 50, 70);
     } else {
-      xs.push(random((height / 3) * -1, width));
-      ys.push(random((height / 3) * -1, height));
-      ws.push(random(height, height * 2));
+      volumeB = map(level, 0.4, 0.6, 70, 250);
     }
-  } else if (f < pf - decreaseDiff) {
-    xs.pop();
-    ys.pop();
-    ws.pop();
+
+    volumeS = map(level, 0, 0.4, 300, 240);
+
+    // volumeB = map(level, 0, 0.4, 20, 160);
+
+    background(centroidH, 280, volumeB);
+    //mids
+    generateBlobs(lowMid, pLowMid, 19, 4, lowMidX, lowMidY, lowMidW, orange);
+    generateBlobs(mid, pMid, 20, 4, midX, midY, midW, green);
+
+    generateBlobs(bass, pBass, 20, 5, bassX, bassY, bassW, red);
+
+    generateBlobs(highMid, pHighMid, 20, 4, highMidX, highMidY, highMidW, blue);
+
+    generateBlobs(treble, pTreble, 20, 4, trebleX, trebleY, trebleW, purple);
+
+    // bass
+
+    if (bass > 120) {
+      fill(centroidH, 300, 20, map(bass, 140, 220, 90, 150));
+    } else if (bass > 220) {
+      fill(centroidH, 300, 20, map(bass, 220, 255, 150, 360));
+    } else {
+      fill(centroidH, 300, 20, map(bass, 0, 140, 40, 90));
+    }
+    rect(0, 0, width, height);
+
+    //highs
+    //random X
+    if (treble > pTreble + 8 && treble > 70) {
+      highBarX.push(random(0, width - width / 3));
+      highBarY.push(random(0, height));
+      highBarH.push(random(5, 60));
+      highBarW.push(random(width / 3, width));
+      highBarGlitch.push(glitches[Math.floor(Math.random() * glitches.length)]);
+    } else if (treble < pTreble - 2) {
+      highBarX.pop();
+      highBarY.pop();
+      highBarH.pop();
+      highBarW.pop();
+      highBarGlitch.pop();
+    }
+
+    for (let i = 0; i < highBarX.length; i++) {
+      push();
+      blendMode(SCREEN);
+      image(
+        highBarGlitch[i],
+        highBarX[i],
+        highBarY[i],
+        highBarW[i],
+        highBarH[i]
+      );
+      pop();
+    }
+
   }
 
-  for (let i = 0; i < xs.length; i++) {
-    if (width > height) {
-      image(
-        color,
-        xs[i],
-        ys[i],
-        width * 0.8 + map(f, 0, 255, 0, width),
-        width * 0.8 + map(f, 0, 255, 0, width)
-      );
-    } else {
-      image(
-        color,
-        xs[i],
-        ys[i],
-        height * 0.8 + map(f, 0, 255, 0, height),
-        height * 0.8 + map(f, 0, 255, 0, height)
-      );
+  function generateBlobs(f, pf, addDiff, decreaseDiff, xs, ys, ws, color) {
+    if (f > pf + addDiff) {
+      // if(height < width){
+      //     xs.push(random((width/2*-1),width));
+      //     ys.push(random((height*-1),height));
+      //     ws.push(random(height, width*2));
+      // }else{
+      //     xs.push(random((width*-1),width));
+      //     ys.push(random((width*-1),height));
+      //     ws.push(random(height, width*2));
+      // }
+      if (height < width) {
+        xs.push(random((width / 3) * -1, width));
+        ys.push(random((width / 3) * -1, height));
+        ws.push(random(height, width * 2));
+      } else {
+        xs.push(random((height / 3) * -1, width));
+        ys.push(random((height / 3) * -1, height));
+        ws.push(random(height, height * 2));
+      }
+    } else if (f < pf - decreaseDiff) {
+      xs.pop();
+      ys.pop();
+      ws.pop();
+    }
+
+    for (let i = 0; i < xs.length; i++) {
+      if (width > height) {
+        image(
+          color,
+          xs[i],
+          ys[i],
+          width * 0.8 + map(f, 0, 255, 0, width),
+          width * 0.8 + map(f, 0, 255, 0, width)
+        );
+      } else {
+        image(
+          color,
+          xs[i],
+          ys[i],
+          height * 0.8 + map(f, 0, 255, 0, height),
+          height * 0.8 + map(f, 0, 255, 0, height)
+        );
+      }
     }
   }
 }
 
 function startSong() {
+  // start the Audio Input.
+  // By default, it does not .connect() (to the computer speakers)
+
+
   welcome.addClass("disappear");
   welcomeButton.addClass("disappear");
   welcome.id("remove");
@@ -331,4 +332,12 @@ function startSong() {
   welcomeClick.id("remove");
 
   welcomeClick.addClass("disappear");
+}
+
+function touchStarted() {
+  mic = new p5.AudioIn();
+
+  mic.start();
+
+  getAudioContext().resume()
 }
